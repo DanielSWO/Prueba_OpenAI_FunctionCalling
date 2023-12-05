@@ -102,7 +102,10 @@ output = completion.choices[0].message
 params = json.loads(output.function_call.arguments)
 
 # Call the function with arguments
-chosen_function = eval(output.function_call.name)
+available_functions = {
+    "get_sum": get_sum,
+}
+chosen_function = available_functions[output.function_call.name]
 sum_result = chosen_function(**params)
 
 print(sum_result)
